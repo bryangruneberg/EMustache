@@ -130,4 +130,27 @@ class SiteController extends Controller
 }
 ~~~
 
+##Using models
+
+~~~
+<?php
+class SiteController extends Controller
+{	
+	public function actionIndex()
+	{
+		$model=new YiiModel;
+                $model->name='Haensel;
+                $model->age=30;
+                $this->render('index',array('model'=>$model);
+	}
+}
+~~~
+
+protected/views/site/index.mustache:
+
+~~~
+Name: {{model.name}}
+Age: {{model.age}}
+~~~
+
 Full mustache syntax: http://mustache.github.com/mustache.5.html

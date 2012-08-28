@@ -72,6 +72,6 @@ class EMustacheViewRenderer extends CApplicationComponent implements IViewRender
                 return ob_get_clean(); 
             } 
             else 
-                echo $rendered;; 
+                echo $rendered;
     }
 }
