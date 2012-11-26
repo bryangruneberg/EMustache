@@ -11,7 +11,7 @@ class EMustacheViewRenderer extends CApplicationComponent implements IViewRender
     * @var string the extension name of the view file. Defaults to '.php'.
     */
     public $fileExtension='.mustache';
-    public $mustachePathAlias='ext.emustache.vendor.mustache.src.mustache';
+    public $mustachePathAlias='ext.emustache.vendor.mustache.src.Mustache';
     public $templatePathAlias = 'application.views';
     
     public $mustacheOptions=array();
