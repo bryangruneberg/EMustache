@@ -33,7 +33,8 @@ class EMustacheViewRenderer extends CApplicationComponent implements IViewRender
             $this->_m = new Mustache_Engine(CMap::mergeArray(
                     array(
                         'cache' => Yii::app()->getRuntimePath().DIRECTORY_SEPARATOR.'Mustache'.DIRECTORY_SEPARATOR.'cache',
-                        'partials_loader' => new Mustache_Loader_FilesystemLoader(Yii::getPathOfAlias($this->templatePathAlias)),
+                        'partials_loader' => new Mustache_Loader_FilesystemLoader(Yii::getPathOfAlias($this->templatePathAlias),
+                            array('extension' => $this->fileExtension)),
                         'escape' => function($value) {
                             return CHtml::encode($value);
                         },
