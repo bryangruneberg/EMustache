@@ -33,7 +33,8 @@ class EMustacheViewRenderer extends CApplicationComponent implements IViewRender
             $this->_m = new Mustache_Engine(CMap::mergeArray(
                     array(
                         'cache' => Yii::app()->getRuntimePath().DIRECTORY_SEPARATOR.'Mustache'.DIRECTORY_SEPARATOR.'cache',
-                        'partials_loader' => new Mustache_Loader_FilesystemLoader(Yii::getPathOfAlias($this->templatePathAlias)),
+                        'partials_loader' => new Mustache_Loader_FilesystemLoader(Yii::getPathOfAlias($this->templatePathAlias),
+                            array('extension' => $this->fileExtension)),
                         'escape' => function($value) {
                             return CHtml::encode($value);
                         },
@@ -58,20 +59,11 @@ class EMustacheViewRenderer extends CApplicationComponent implements IViewRender
 
             $rendered=$this->_m->render(file_get_contents($sourceFile),$data);
             
-            //return $context->renderInternal(realpath($sourceFile),$data,$return);
-            //THIS IS A HACK TO NOT REQUIRE THE RENDERED TEMPLATE (as renderInternal would do) AS MUSTACHE IS USING NATIVE PHP CLASSES FOR CACHING
-            if(is_array($data)) 
-                extract($data,EXTR_PREFIX_SAME,'data'); 
-            else 
-                $data=$data; 
-            if($return) 
-            { 
-                ob_start(); 
-                ob_implicit_flush(false); 
-                echo $rendered;
-                return ob_get_clean(); 
-            } 
-            else 
+            if($return)
+            {
+                return $rendered;
+            }
+            else
                 echo $rendered;
     }
 }
